@@ -1,5 +1,6 @@
 import { axiosInstance } from "./config"
 
+
 const getPokemons = (limit = 151) => {
     return axiosInstance.get(`/pokemon?limit=${limit}`)
         .then((response) => {
@@ -10,5 +11,11 @@ const getPokemons = (limit = 151) => {
         });
 }
 
+const getPokemonWithDetails = () => {
+    return getPokemons()
+        .then((response) => {
+            return response.map((resp) => resp.data);
+        });
+}
 
-export { getPokemons };
+export { getPokemons, getPokemonWithDetails };

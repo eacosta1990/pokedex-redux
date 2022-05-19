@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getPokemonWithDetails } from "../actions";
+import { fetchPokemon } from "../actions";
 import { PokemonCard } from "./PokemonCard";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/pokemon.css";
@@ -9,7 +9,7 @@ const PokemonList = () => {
     const pokemons = useSelector(state => state.list);
 
     useEffect(() => {
-        dispatch(getPokemonWithDetails());
+        dispatch(fetchPokemon());
     }, []);
 
     return (

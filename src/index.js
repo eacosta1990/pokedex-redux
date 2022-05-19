@@ -8,13 +8,23 @@ import { Provider } from 'react-redux';
 import { pokemonReducer } from './reducers/pokemonReducer';
 import { logActions } from './middlewares';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from '@redux-saga/core';
+import { pokemonSaga } from './sagas';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const composeEnhasers = composeAlt(applyMiddleware(thunk, logActions));
 
-const store = createStore(pokemonReducer, composeEnhasers)
+const sagaMiddleWare = createSagaMiddleware();
+
+
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhasers = composeAlt (
+  applyMiddleware(sagaMiddleWare, logActions)
+);
+
+
+const store = createStore(pokemonReducer, composeEnhasers,)
+sagaMiddleWare.run(pokemonSaga);
 
 root.render(
   <React.StrictMode>
