@@ -1,0 +1,2 @@
+# pokedex-redux
+practica redux
